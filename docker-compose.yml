@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  streamlit_app:
+    build:
+      context: streamlit_app
+      dockerfile: Dockerfile
+    container_name: streamlit_app
+    stdin_open: true
+    tty: true
+    ports:
+      - '8001:8501'
+    volumes:
+      - './streamlit_app:/app'
+
+  dash_app:
+    build:
+      context: dash_app
+      dockerfile: Dockerfile
+    container_name: dash_app
+    stdin_open: true
+    tty: true
+    ports:
+      - '8002:8050'
+    volumes:
+      - './dash_app:/app'
+
+  panel_app:
+    build:
+      context: panel_app
+      dockerfile: Dockerfile
+    container_name: panel_app
+    stdin_open: true
+    tty: true
+    ports:
+      - '5006:5006'
+    volumes:
+      - './panel_app:/app'
