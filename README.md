@@ -25,3 +25,7 @@ Panel is a Python library within the HoloViz ecosystem, used for creating intera
 * `make up` - use to run all applications
 * `make down` - use to stop all applications
 * `make build` - use to manually build all applications
+
+### Maintenance recommendations
+* Install `pre-commit` ([link](https://pre-commit.com/))
+* Run command `make update-deps` after any packages modifications
