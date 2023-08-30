@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 
 import altair as alt
 import pandas as pd
@@ -6,20 +7,20 @@ import streamlit as st
 
 # Load data from file
 with open("trending.json") as f:
-    trending_json_data = json.load(f)
+    trending_json_data: Dict = json.load(f)
 
 # Prepare data frames
-df_week = pd.DataFrame(trending_json_data["week"])
-df_month = pd.DataFrame(trending_json_data["month"])
+df_week: pd.DataFrame = pd.DataFrame(trending_json_data["week"])
+df_month: pd.DataFrame = pd.DataFrame(trending_json_data["month"])
 
 # Prepare charts
-trending_week_chart_data = (
+trending_week_chart_data: alt.Chart = (
     alt.Chart(df_week)
     .mark_bar()
     .encode(x=alt.X("full_name", title="Name", sort=None), y=alt.Y("stargazers_count", title="Stars count"))
     .interactive()
 )
-trending_month_chart_data = (
+trending_month_chart_data: alt.Chart = (
     alt.Chart(df_month)
     .mark_bar()
     .encode(

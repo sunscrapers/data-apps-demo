@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 
 import pandas as pd
 from dash import Dash
@@ -10,14 +11,14 @@ from dash import html
 
 # Load data from file
 with open("trending.json") as f:
-    trending_json_data = json.load(f)
+    trending_json_data: Dict = json.load(f)
 
 # Prepare data frames
-df_week = pd.DataFrame(trending_json_data["week"])
-df_month = pd.DataFrame(trending_json_data["month"])
+df_week: pd.DataFrame = pd.DataFrame(trending_json_data["week"])
+df_month: pd.DataFrame = pd.DataFrame(trending_json_data["month"])
 
 # Prepare graphs
-graph_week = dcc.Graph(
+graph_week: dcc.Graph = dcc.Graph(
     figure={
         "data": [
             {
@@ -28,7 +29,7 @@ graph_week = dcc.Graph(
         ],
     }
 )
-graph_month = dcc.Graph(
+graph_month: dcc.Graph = dcc.Graph(
     figure={
         "data": [
             {
@@ -41,7 +42,7 @@ graph_month = dcc.Graph(
 )
 
 # Initialize app
-app = Dash(__name__)
+app: Dash = Dash(__name__)
 
 # Define layout of the page
 app.layout = html.Div(
