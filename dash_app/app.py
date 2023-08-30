@@ -6,9 +6,13 @@ from dash import callback
 from dash import dcc
 from dash import html
 
+# Load data from file
 df = pd.read_json("trending.json")
 
+# Initialize app
 app = Dash(__name__)
+
+# Define layout
 app.layout = html.Div(
     [
         dcc.Graph(id="graph-content", config={}, style={"margin-bottom": "15px"}),
@@ -16,7 +20,7 @@ app.layout = html.Div(
     ]
 )
 
-
+# Connect dropdown with graph and fill graph with data
 @callback(Output("graph-content", "figure"), Input("dropdown-selection", "value"))
 def update_graph(value):
     dff = df[value]
