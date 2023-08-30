@@ -29,10 +29,11 @@ services:
     build:
       context: panel_app
       dockerfile: Dockerfile
+    command: panel serve app.py --autoreload --show --allow-websocket-origin=localhost:8003
     container_name: panel_app
     stdin_open: true
     tty: true
     ports:
-      - '5006:5006'
+      - '8003:5006'
     volumes:
       - './panel_app:/app'

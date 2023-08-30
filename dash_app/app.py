@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 from dash import Dash
 from dash import Input
@@ -7,34 +9,64 @@ from dash import dcc
 from dash import html
 
 # Load data from file
-df = pd.read_json("trending.json")
+with open("trending.json") as f:
+    trending_json_data = json.load(f)
+
+# Prepare data frames
+df_week = pd.DataFrame(trending_json_data["week"])
+df_month = pd.DataFrame(trending_json_data["month"])
+
+# Prepare graphs
+graph_week = dcc.Graph(
+    figure={
+        "data": [
+            {
+                "x": df_week.full_name,
+                "y": df_week.stargazers_count,
+                "type": "bar",
+            },
+        ],
+    }
+)
+graph_month = dcc.Graph(
+    figure={
+        "data": [
+            {
+                "x": df_month.full_name,
+                "y": df_month.stargazers_count,
+                "type": "bar",
+            },
+        ],
+    }
+)
 
 # Initialize app
 app = Dash(__name__)
 
-# Define layout
+# Define layout of the page
 app.layout = html.Div(
     [
-        dcc.Graph(id="graph-content", config={}, style={"margin-bottom": "15px"}),
-        dcc.Dropdown(df.keys(), "month", id="dropdown-selection"),
+        html.H1("Top Github Trending Repositories"),
+        dcc.Tabs(
+            id="tabs-example-graph",
+            value="week",
+            children=[
+                dcc.Tab(label="This week", value="week"),
+                dcc.Tab(label="This month", value="month"),
+            ],
+        ),
+        html.Div(id="tabs-content-example-graph"),
     ]
 )
 
-# Connect dropdown with graph and fill graph with data
-@callback(Output("graph-content", "figure"), Input("dropdown-selection", "value"))
-def update_graph(value):
-    dff = df[value]
 
-    return {
-        "data": [
-            {
-                "x": [row["full_name"] for row in dff],
-                "y": [row["stargazers_count"] for row in dff],
-                "type": "bar",
-            },
-        ],
-        "layout": {"title": "Top Github Trending Repositories"},
-    }
+# Connect tabs with graphs
+@callback(Output("tabs-content-example-graph", "children"), Input("tabs-example-graph", "value"))
+def render_content(tab):
+    if tab == "week":
+        return graph_week
+    elif tab == "month":
+        return graph_month
 
 
 if __name__ == "__main__":

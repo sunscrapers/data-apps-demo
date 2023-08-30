@@ -1,23 +1,26 @@
+import json
+
 import altair as alt
 import pandas as pd
 import streamlit as st
 
 # Load data from file
-df = pd.read_json("trending.json")
+with open("trending.json") as f:
+    trending_json_data = json.load(f)
 
-# Prepare chart data
+# Prepare data frames
+df_week = pd.DataFrame(trending_json_data["week"])
+df_month = pd.DataFrame(trending_json_data["month"])
+
+# Prepare charts
 trending_week_chart_data = (
-    alt.Chart(
-        pd.DataFrame(list(df["week"].values)),
-    )
+    alt.Chart(df_week)
     .mark_bar()
     .encode(x=alt.X("full_name", title="Name", sort=None), y=alt.Y("stargazers_count", title="Stars count"))
     .interactive()
 )
 trending_month_chart_data = (
-    alt.Chart(
-        pd.DataFrame(list(df["month"].values)),
-    )
+    alt.Chart(df_month)
     .mark_bar()
     .encode(
         x=alt.X("full_name", title="Name", sort=None),

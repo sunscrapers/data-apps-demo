@@ -16,5 +16,4 @@ COPY . /app
 WORKDIR app
 
 # Run streamlit
-# CMD panel serve app.ipynb --autoreload --show
 CMD panel serve app.py --autoreload --show
