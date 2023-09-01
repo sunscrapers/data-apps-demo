@@ -9,6 +9,10 @@ import streamlit as st
 with open("trending.json") as f:
     trending_json_data: Dict = json.load(f)
 
+# TODO: Intergrate here fetching data from API
+# TODO: Add caching to fetch data once per X minutes
+# TODO: Use redis + redis lock
+
 # Prepare data frames
 df_week: pd.DataFrame = pd.DataFrame(trending_json_data["week"])
 df_month: pd.DataFrame = pd.DataFrame(trending_json_data["month"])
@@ -17,7 +21,10 @@ df_month: pd.DataFrame = pd.DataFrame(trending_json_data["month"])
 trending_week_chart_data: alt.Chart = (
     alt.Chart(df_week)
     .mark_bar()
-    .encode(x=alt.X("full_name", title="Name", sort=None), y=alt.Y("stargazers_count", title="Stars count"))
+    .encode(
+        x=alt.X("full_name", title="Name", sort=None),
+        y=alt.Y("stargazers_count", title="Stars count"),
+    )
     .interactive()
 )
 trending_month_chart_data: alt.Chart = (

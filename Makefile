@@ -1,4 +1,4 @@
-.PHONY: update-deps, up, down, build
+.PHONY: update-deps, up, down, build, streamlit, dash, panel
 
 update-deps:
 	pip install pip-tools --upgrade
@@ -15,3 +15,12 @@ down:
 
 build:
 	docker-compose build
+
+streamlit:
+	docker exec -it streamlit_app bash
+
+dash:
+	docker exec -it dash_app bash
+
+panel:
+	docker exec -it panel_app bash

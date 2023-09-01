@@ -25,6 +25,9 @@ Panel is a Python library within the HoloViz ecosystem, used for creating intera
 * `make up` - use to run all applications
 * `make down` - use to stop all applications
 * `make build` - use to manually build all applications
+* `make streamlit` - use to enter into `streamlit_app` docker container. For debugging purposes.
+* `make dash` - use to enter into `dash_app` docker container. For debugging purposes.
+* `make panel` - use to enter into `panel_app` docker container. For debugging purposes.
 
 ### Maintenance recommendations
 * Install `pre-commit` ([link](https://pre-commit.com/))

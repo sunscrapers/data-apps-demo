@@ -3,8 +3,8 @@ version: '3'
 services:
   streamlit_app:
     build:
-      context: streamlit_app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: streamlit_app/Dockerfile
     container_name: streamlit_app
     stdin_open: true
     tty: true
@@ -12,6 +12,7 @@ services:
       - '8001:8501'
     volumes:
       - './streamlit_app:/app'
+      - './common:/app/common'
 
   dash_app:
     build:

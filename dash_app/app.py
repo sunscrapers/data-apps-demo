@@ -62,7 +62,10 @@ app.layout = html.Div(
 
 
 # Connect tabs with graphs
-@callback(Output("tabs-content-example-graph", "children"), Input("tabs-example-graph", "value"))
+@callback(
+    Output("tabs-content-example-graph", "children"),
+    Input("tabs-example-graph", "value"),
+)
 def render_content(tab):
     if tab == "week":
         return graph_week
