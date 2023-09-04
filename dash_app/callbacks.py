@@ -14,12 +14,14 @@ from components import get_github_trending_graph
 from components import get_github_trending_repo_row
 
 
-# Return proper graph (children) for chosen tab
 @callback(
     Output("tabs-content-trending-graph", "children"),
     Input("tabs-trending-graph", "value"),
 )
 def github_repos_render_graph(tab) -> list:
+    """
+    Return proper graph (children) for chosen tab.
+    """
     date_range: GithubTrendingDateRange = GithubTrendingDateRange.daily
     if tab == GithubTrendingDateRange.weekly.value:
         date_range = GithubTrendingDateRange.weekly
@@ -37,6 +39,9 @@ def github_repos_render_graph(tab) -> list:
     State("tabs-trending-graph", "value"),
 )
 def github_repos_graph_display_hover(hover_data: Dict[str, Any], trending_graph_tab: str) -> tuple:
+    """
+    Update tooltip for graph on hover.
+    """
     if hover_data is None:
         return False, no_update, no_update
 
