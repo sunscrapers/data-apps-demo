@@ -15,7 +15,8 @@ Panel is a Python library within the HoloViz ecosystem, used for creating intera
 * `docker-compose`
 
 ## How to run applications
-* run command `make up`
+* Create `.env` file basing on `.env_example`
+* Run command `make up`
 + `Streamlit` will be exposed under [localhost:8001](http://localhost:8001) url
 + `Dash` will be exposed under [localhost:8002](http://localhost:8002) url
 + `Panel` will be exposed under [localhost:8003](http://localhost:8003) url

@@ -3,9 +3,9 @@
 update-deps:
 	pip install pip-tools --upgrade
 
-	pip-compile streamlit_app/requirements.in
-	pip-compile dash_app/requirements.in
-	pip-compile panel_app/requirements.in
+	pip-compile streamlit_app/requirements/base.in
+	pip-compile dash_app/requirements/base.in
+	pip-compile panel_app/requirements/base.in
 
 up:
 	docker-compose up --build
