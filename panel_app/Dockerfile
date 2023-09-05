@@ -8,7 +8,7 @@ RUN apt-get update && apt-get -y install gcc
 
 # Add and install requirements
 RUN pip install --upgrade pip
-COPY ./requirements/base.txt ./requirements.txt
+COPY ./panel_app/requirements/base.txt ./requirements.txt
 RUN pip install -r requirements.txt
 
 # Copy project files

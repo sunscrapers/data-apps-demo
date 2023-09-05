@@ -33,14 +33,15 @@ services:
   panel_app:
     <<: *base_app_conf
     build:
-      context: panel_app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: panel_app/Dockerfile
     command: panel serve app.py --autoreload --show --allow-websocket-origin=localhost:8003
     container_name: panel_app
     ports:
       - '8003:5006'
     volumes:
       - './panel_app:/app'
+      - './common:/app/common'
 
   redis:
     image: redis:latest
