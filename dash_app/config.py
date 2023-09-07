@@ -12,7 +12,7 @@ def get_cache_client(dash_app: Dash) -> Cache:
             "CACHE_REDIS_URL": os.environ.get("REDIS_URL", ""),
         },
     )
-    cache_client.set("test", "123")
+    cache_client.set("ping", "XYZ", timeout=1)
     return cache_client
 
 

@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from bs4 import Tag
 
-from common.constants import GITHUB_TRENDING_PAGE_URL
+from common.constants import GITHUB_TRENDING_PYTHON_PAGE_URL
 from common.constants import GithubTrendingDateRange
 from common.schemas import RepositoryData
 
@@ -39,7 +39,7 @@ class GithubTrendingHandler:
                     pass
         return repo_name_parts
 
-    def __gen_repo_name(self, strings: List[str]) -> Optional[str]:
+    def __gen_repo_name(self, strings: List[str]) -> str:
         if not len(strings) == 2:
             return "Unknown"
         return " / ".join(strings)
@@ -57,18 +57,27 @@ class GithubTrendingHandler:
             return 0
 
     def get_repo_full_name(self, repo: Tag) -> str:
-        repo_name_heading: Tag = repo.find("h2", class_="h3 lh-condensed")
-        repo_name_link: Tag = repo_name_heading.find("a", class_="Link")
+        repo_name_heading: Optional[Tag] = repo.find("h2", class_="h3 lh-condensed")
+        if not repo_name_heading:
+            return self.__gen_repo_name(strings=[])
+
+        repo_name_link: Optional[Tag] = repo_name_heading.find("a", class_="Link")
+        if not repo_name_link:
+            return self.__gen_repo_name(strings=[])
 
         repo_full_name_strings: List[str] = self.__get_text_from_strings(
             pattern=repo_name_pattern, strings=list(repo_name_link.strings)
         )
-
         return self.__gen_repo_name(repo_full_name_strings)
 
     def get_repo_stars_count(self, repo: Tag) -> int:
-        stars_count_block: Tag = repo.find("div", class_="f6 color-fg-muted mt-2")
-        stars_count_link: Tag = stars_count_block.find("a", class_="Link")
+        stars_count_block: Optional[Tag] = repo.find("div", class_="f6 color-fg-muted mt-2")
+        if not stars_count_block:
+            return self.__gen_stars_count(strings=[])
+
+        stars_count_link: Optional[Tag] = stars_count_block.find("a", class_="Link")
+        if not stars_count_link:
+            return self.__gen_stars_count(strings=[])
 
         repo_stars_count_strings: List[str] = self.__get_text_from_strings(
             pattern=stars_count_pattern, strings=list(stars_count_link.strings)
@@ -76,7 +85,10 @@ class GithubTrendingHandler:
         return self.__gen_stars_count(strings=repo_stars_count_strings)
 
     def get_repo_trending_stars_count(self, repo: Tag) -> int:
-        trending_stars_count_block: Tag = repo.find("span", class_="d-inline-block float-sm-right")
+        trending_stars_count_block: Optional[Tag] = repo.find("span", class_="d-inline-block float-sm-right")
+        if not trending_stars_count_block:
+            return self.__gen_stars_count(strings=[])
+
         trending_stars_count_strings: List[str] = self.__get_text_from_strings(
             pattern=stars_count_pattern,
             strings=list(trending_stars_count_block.strings),
@@ -96,7 +108,7 @@ class GithubTrendingHandler:
 
     def get_repos(self) -> List[Tag]:
         date_range: GithubTrendingDateRange = self.date_range if self.date_range else GithubTrendingDateRange.weekly
-        url = f"{GITHUB_TRENDING_PAGE_URL}?since={date_range.value}"
+        url = f"{GITHUB_TRENDING_PYTHON_PAGE_URL}?since={date_range.value}"
 
         page_response: requests.Response = requests.get(url, timeout=10)
         if not page_response.status_code == 200:
