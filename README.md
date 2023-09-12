@@ -22,14 +22,18 @@ Panel is a Python library within the HoloViz ecosystem, used for creating intera
 + `Panel` will be exposed under [localhost:8003](http://localhost:8003) url
 
 ## Available commands (using `make`)
-* `make update-deps` - use if any libraries has been added / changed / removed
 * `make up` - use to run all applications
 * `make down` - use to stop all applications
 * `make build` - use to manually build all applications
 * `make streamlit` - use to enter into `streamlit_app` docker container. For debugging purposes.
+* `make streamlit-build` - use to build Streamlit app.
+* `make streamlit-run` - use to run Streamlit app.
 * `make dash` - use to enter into `dash_app` docker container. For debugging purposes.
+* `make dash-build` - use to build Dash app.
+* `make dash-run` - use to run Dash app.
 * `make panel` - use to enter into `panel_app` docker container. For debugging purposes.
+* `make panel-build` - use to build Panel app.
+* `make panel-run` - use to run Panel app.
 
 ### Maintenance recommendations
 * Install `pre-commit` ([link](https://pre-commit.com/))
-* Run command `make update-deps` after any packages modifications
