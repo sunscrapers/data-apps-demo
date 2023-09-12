@@ -15,5 +15,5 @@ RUN pip install -r requirements.txt
 COPY . /app
 WORKDIR app
 
-# Run streamlit
+# Run panel app
 CMD panel serve app.py --autoreload --show
