@@ -2,6 +2,7 @@ import os
 
 from dash import Dash
 from flask_caching import Cache
+from redis.exceptions import ConnectionError as RedisConnectionError
 
 
 def get_cache_client(dash_app: Dash) -> Cache:
@@ -12,7 +13,11 @@ def get_cache_client(dash_app: Dash) -> Cache:
             "CACHE_REDIS_URL": os.environ.get("REDIS_URL", ""),
         },
     )
-    cache_client.set("ping", "XYZ", timeout=1)
+
+    try:
+        cache_client.set("ping", "XYZ", timeout=1)
+    except RedisConnectionError:
+        return Cache(dash_app.server, config={"CACHE_TYPE": "SimpleCache"})
     return cache_client
 
 
