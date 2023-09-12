@@ -1,0 +1,7 @@
+dash==2.13.0
+plotly==5.16.1
+pandas==2.0.3
+beautifulsoup4==4.12.2
+
+Flask-Caching==2.0.2
+redis==5.0.0

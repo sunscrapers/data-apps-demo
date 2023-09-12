@@ -1,0 +1,59 @@
+version: '3'
+
+x-base-app-conf: &base_app_conf
+  env_file: .env
+  stdin_open: true
+  tty: true
+
+services:
+  streamlit_app:
+    <<: *base_app_conf
+    build:
+      context: .
+      dockerfile: streamlit_app/Dockerfile
+    container_name: streamlit_app
+    ports:
+      - '8001:8501'
+    volumes:
+      - './streamlit_app:/app'
+      - './common:/app/common'
+
+  dash_app:
+    <<: *base_app_conf
+    build:
+      context: .
+      dockerfile: dash_app/Dockerfile
+    container_name: dash_app
+    ports:
+      - '8002:8050'
+    volumes:
+      - './dash_app:/app'
+      - './common:/app/common'
+
+  panel_app:
+    <<: *base_app_conf
+    build:
+      context: .
+      dockerfile: panel_app/Dockerfile
+    command: panel serve app.py --autoreload --show --allow-websocket-origin=localhost:8003
+    container_name: panel_app
+    ports:
+      - '8003:5006'
+    volumes:
+      - './panel_app:/app'
+      - './common:/app/common'
+
+  redis:
+    image: redis:latest
+    command: redis-server
+    container_name: redis
+    volumes:
+      - redis:/var/lib/redis
+      - redis-config:/usr/local/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+
+
+volumes:
+  redis:
+  redis-config:
