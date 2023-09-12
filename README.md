@@ -8,7 +8,7 @@ Data apps comparison for: Streamlit, Panel and Dash.
 `Dash` is a Python framework for creating interactive web applications for data visualization and analytics. `Dash` is built on top of [Flask](https://flask.palletsprojects.com/en) and [Plotly](https://plotly.com/python/).
 
 ## What is a Panel by HoloViz?
-Panel is a Python library within the HoloViz ecosystem, used for creating interactive web applications for data visualization, analysis, and modeling. `Panel` is served via [Tornado](https://www.tornadoweb.org/en/stable/).
+Panel is a Python library within the HoloViz ecosystem, used for creating interactive web applications for data visualization, analysis, and modeling. `Panel` is built on the top of [Bokeh](https://bokeh.org/), and thus it is served via [Tornado](https://www.tornadoweb.org/en/stable/).
 
 ## Pre-Requirements
 * `docker`
