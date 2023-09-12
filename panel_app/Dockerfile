@@ -13,6 +13,7 @@ RUN pip install -r requirements.txt
 
 # Copy project files
 COPY . /app
+COPY ./common /app/common
 WORKDIR app
 
 # Run panel app

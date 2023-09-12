@@ -8,6 +8,7 @@ x-base-app-conf: &base_app_conf
 services:
   streamlit_app:
     <<: *base_app_conf
+    image: streamlit_app:latest
     build:
       context: .
       dockerfile: streamlit_app/Dockerfile
@@ -20,6 +21,7 @@ services:
 
   dash_app:
     <<: *base_app_conf
+    image: dash_app:latest
     build:
       context: .
       dockerfile: dash_app/Dockerfile
@@ -32,10 +34,10 @@ services:
 
   panel_app:
     <<: *base_app_conf
+    image: panel_app:latest
     build:
       context: .
       dockerfile: panel_app/Dockerfile
-    command: panel serve app.py --autoreload --show --allow-websocket-origin=localhost:8003
     container_name: panel_app
     ports:
       - '8003:5006'
@@ -52,7 +54,6 @@ services:
       - redis-config:/usr/local/etc/redis/redis.conf
     ports:
       - 6379:6379
-
 
 volumes:
   redis:
