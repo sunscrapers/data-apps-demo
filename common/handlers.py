@@ -184,7 +184,7 @@ class GithubTrendingHandler:
         url = f"{GITHUB_TRENDING_PYTHON_PAGE_URL}?since={date_range.value}"
 
         page_response: requests.Response = requests.get(url, timeout=10)
-        if not page_response.ok or page_response.status_code != 200:
+        if not page_response.ok:
             raise Exception("Error during loading Github Trending page")
 
         soup: BeautifulSoup = BeautifulSoup(page_response.content, "html.parser")

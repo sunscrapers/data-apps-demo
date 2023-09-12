@@ -16,4 +16,4 @@ COPY . /app
 WORKDIR app
 
 # Run panel app
-CMD panel serve app.py --autoreload --show
+CMD panel serve app.py --autoreload --show --allow-websocket-origin=localhost:8003
