@@ -9,7 +9,8 @@ COPY ./dash_app/requirements/base.txt ./requirements.txt
 RUN pip install -r requirements.txt
 
 # Copy project files
-COPY . /app
+COPY ./dash_app /app
+COPY ./common /app/common
 WORKDIR app
 
 # Run Dash app
