@@ -45,4 +45,6 @@ tests:
 
 tests-run:
 	make tests-build
-	docker run --name tests_e2e --network="host" --rm -it tests_e2e:latest pytest -s --base-url http://localhost:8002
+	docker run --name tests_e2e --network="host" --rm -it tests_e2e:latest pytest streamlit -s --base-url http://localhost:8001
+	docker run --name tests_e2e --network="host" --rm -it tests_e2e:latest pytest dash -s --base-url http://localhost:8002
+	docker run --name tests_e2e --network="host" --rm -it tests_e2e:latest pytest panel -s --base-url http://localhost:8003
