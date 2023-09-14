@@ -34,6 +34,9 @@ Panel is a Python library within the HoloViz ecosystem, used for creating intera
 * `make panel` - use to enter into `panel_app` docker container. For debugging purposes.
 * `make panel-build` - use to build Panel app.
 * `make panel-run` - use to run Panel app.
+* `make tests-build` - use to build Docker image for E2E tests
+* `make tests` - use to run Docker container for E2E tests
+* `make tests-run` - use to run all E2E tests
 
 ### Maintenance recommendations
 * Install `pre-commit` ([link](https://pre-commit.com/))
