@@ -1,25 +1,45 @@
 # data-apps-demo
 Data apps comparison for: Streamlit, Panel and Dash.
 
-## What is Streamlit?
-`Streamlit` is a popular Python library used for creating interactive web applications for data visualization and machine learning. `Streamlit` is served via [Tornado](https://www.tornadoweb.org/en/stable/).
+## Introduction
+This repository contains a comparative analysis of three popular Python frameworks for creating interactive web applications for data visualization and analysis: Streamlit, Panel, and Dash. We aim to explore the main differences and features of these frameworks to help you choose the one that best suits your needs.
 
-## What is Dash by Plotly?
-`Dash` is a Python framework for creating interactive web applications for data visualization and analytics. `Dash` is built on top of [Flask](https://flask.palletsprojects.com/en) and [Plotly](https://plotly.com/python/).
+## Applications
+### Streamlit
+**Streamlit** is a Python library designed for creating interactive web applications for data visualization and machine learning. It is served via [Tornado](https://www.tornadoweb.org/en/stable/).
 
-## What is a Panel by HoloViz?
-Panel is a Python library within the HoloViz ecosystem, used for creating interactive web applications for data visualization, analysis, and modeling. `Panel` is built on the top of [Bokeh](https://bokeh.org/), and thus it is served via [Tornado](https://www.tornadoweb.org/en/stable/).
+### Dash by Plotly
+**Dash** is a Python framework that enables the creation of interactive web applications for data visualization and analytics. It is built on top of [Flask](https://flask.palletsprojects.com/en) and [Plotly](https://plotly.com/python/).
+
+### Panel by HoloViz
+**Panel** is a Python library within the HoloViz ecosystem, used for creating interactive web applications for data visualization, analysis, and modeling. Panel is built on top of [Bokeh](https://bokeh.org/) and is served via [Tornado](https://www.tornadoweb.org/en/stable/).
+
+## Blog Post
+We have also written a detailed blog post that describes these technologies and provides insights into their strengths and use cases. You can read the blog post on our [blog](#link-to-blog-post).
+
+## Screenshots
+Below are screenshots of each of the three applications for a quick overview:
+
+### Streamlit
+![Streamlit Screenshot](screenshots/streamlit.png)
+
+### Dash by Plotly
+![Dash Screenshot](screenshots/dash.png)
+
+### Panel by HoloViz
+![Panel Screenshot](screenshots/panel.png)
 
 ## Pre-Requirements
 * `docker`
 * `docker-compose`
 
-## How to run applications
-* Create `.env` file basing on `.env_example`
-* Run command `make up`
-+ `Streamlit` will be exposed under [localhost:8001](http://localhost:8001) url
-+ `Dash` will be exposed under [localhost:8002](http://localhost:8002) url
-+ `Panel` will be exposed under [localhost:8003](http://localhost:8003) url
+## How to Run Applications
+* Create a `.env` file based on `.env_example`.
+* Run the command `make up`.
+* Access the applications using the following URLs:
+  - `Streamlit`: [localhost:8001](http://localhost:8001)
+  - `Dash`: [localhost:8002](http://localhost:8002)
+  - `Panel`: [localhost:8003](http://localhost:8003)
 
 ## Available commands (using `make`)
 * `make up` - use to run all applications
@@ -42,8 +62,8 @@ Panel is a Python library within the HoloViz ecosystem, used for creating intera
 * Install `pre-commit` ([link](https://pre-commit.com/))
 
 ## Testing
-To check all three data apps, we've chosen to use `Playwright`, a useful tool for crafting E2E tests that address the key aspects.
+To evaluate and test all three data apps, we have employed `Playwright`, a powerful tool for crafting end-to-end (E2E) tests that cover essential aspects of the applications.
 
-How to execute e2e tests:
-* Use command `make up` to run all needed services
-* Use command `make tests-run` to execute all e2e tests
+### How to Execute E2E Tests
+* Use the command `make up` to run all the required services
+* Execute the command `make tests-run` to run all E2E tests
