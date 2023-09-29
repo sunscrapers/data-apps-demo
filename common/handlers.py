@@ -178,7 +178,8 @@ class GithubTrendingHandler:
         Get the Github trending Python HTML page while respecting the specified `date_range`.
 
         Returns:
-            List[Tag]: A list of BeautifulSoup Tag objects representing articles (boxes) containing information about repositories.
+            List[Tag]: A list of BeautifulSoup Tag objects representing articles (boxes)
+            containing information about repositories.
         """
         date_range: GithubTrendingDateRange = self.date_range if self.date_range else GithubTrendingDateRange.weekly
         url = f"{GITHUB_TRENDING_PYTHON_PAGE_URL}?since={date_range.value}"
